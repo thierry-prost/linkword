@@ -7,8 +7,8 @@ var upload = multer({
 });
 
 module.exports = function (app) {
-  app.post('/values', upload.any(), excel.cache);
-  app.post('/template', upload.any(), word.downloadZip)
+  app.post('/excel', upload.any(), excel.cache);
+  app.post('/word', upload.any(), word.downloadZip)
   app.get('/', static.loadIndex);
   app.get(/([a-zA-Z0-9\s_\\.\-\(\):])+(.css|.js|.html)$/, static.loadStatic);
 }

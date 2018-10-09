@@ -13,9 +13,9 @@ module.exports.downloadZip = function (req, res) {
   if (!headers || !values) {
     throw new Error('Please upload an Excel file first.');
   }
-  var fileNames = {};
+  let fileNames = {};
   setFileNames();
-  var newZip = new JSZip();
+  let newZip = new JSZip();
   values.forEach(function (row, index) {
     let zip = new JSZip(req.files[0].buffer);
     let doc = new Docxtemplater().loadZip(zip);
@@ -25,7 +25,7 @@ module.exports.downloadZip = function (req, res) {
     try {
       doc.render()
     } catch (error) {
-      throw new Error(error.message);
+      throw new Error("Error rendering the doc template.");
     };
     let file = doc.getZip().generate({
       type: 'nodebuffer'
@@ -34,13 +34,14 @@ module.exports.downloadZip = function (req, res) {
   });
   let folderDir = appData() + '/linkword';
   let fileDir = folderDir + '/linkword.zip';
-  var content = newZip.generate({
-    type: "nodebuffer"
+  let content = newZip.generate({
+    type: 'nodebuffer'
   });
   fs.writeFile(fileDir, content, 'utf8', (err, data) => {
     if (err) {
+      throw new Error('Looks like the access to your files is restricted.')
     } else {
-      res.sendFile(fileDir);
+      res.download(fileDir);
     }
   });
 
