@@ -33,6 +33,9 @@ module.exports.downloadZip = function (req, res) {
     newZip.file(fileNames[index], file);
   });
   let folderDir = appData() + '/linkword';
+  if (!fs.existsSync(folderDir)) {
+    fs.mkdirSync(folderDir);
+  }
   let fileDir = folderDir + '/linkword.zip';
   let content = newZip.generate({
     type: 'nodebuffer'
