@@ -1,13 +1,22 @@
 var xlsx = require('xlsx');
 var mcache = require('memory-cache');
 
-module.exports.cache = function (req, res) {
-  let workbook = readWorkbook(req);
-  let worksheet = verifyWorkbook(workbook);
-  let data = readWorksheet(worksheet);
-  mcache.put('headers', data.headers);
-  mcache.put('values', data.values);
-  res.sendStatus(200);
+module.exports.cache = function (req, res, next) {
+  try {
+    let workbook = readWorkbook(req);
+    let worksheet = verifyWorkbook(workbook);
+    let data = null;
+    try {
+      data = readWorksheet(worksheet);
+    } catch (err) {
+      throw new Error('Could not read worksheet.');
+    }
+    mcache.put('headers', data.headers);
+    mcache.put('values', data.values);
+    res.sendStatus(200);
+  } catch (err) {
+    return next(err);
+  }
 };
 
 function readWorkbook(req) {

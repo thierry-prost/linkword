@@ -87,6 +87,10 @@
               }
             };
 
+            xhr.onerror = function (err) {
+              callback(new Error("Looks like you closed the terminal (that black window)...?"), null);
+            }
+
             xhr.send(data);
           } catch (e) {
             callback(new Error(e), null);

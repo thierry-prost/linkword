@@ -6,13 +6,17 @@ body {
 
 h1 {
     margin-top: 0;
-    font-size: 3rem;
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 1.4rem;
 }
 
 .header {
     text-align: center;
     width: 100%;
-    padding: 4rem 0 2rem 0;
+    padding: 3rem 0 1.5rem 0;
     background: #237A57;
     background: -webkit-linear-gradient(to right, #093028, #237A57 30%, #237A57 70%, #093028 100%);
     background: linear-gradient(to right, #093028, #237A57 30%, #237A57 70%, #093028 100%);
@@ -25,8 +29,12 @@ h2 {
 
 .office {
     width: 40%;
-    max-width: 250px;
-    padding: 2rem;
+    max-width: 205px;
+    padding: 1.5rem;
+}
+
+.icon {
+    width: 10%;
 }
 
 .description {
@@ -48,27 +56,47 @@ h2 {
         display: block;
         width: 90%;
     }
+
+    #word,
+    #excel {
+        margin: 3% 5%;
+    }
 }
 
 @media screen and (min-width: 1024px) {
     .drop {
         display: inline-block;
-        width: 40%;
+        width: 42.5%;
+    }
+
+    #word {
+        margin: 3% 0 3% 2.5%;
+    }
+
+    #excel {
+        margin: 3% 2.5% 3% 5%;
     }
 }
 
-#word {
-    margin: 5%;
+#error {
+    display: inline-block;
+    width: 90%;
+    text-align: center;
+    padding: 2rem 5%;
+    margin: 0 5% 10% 5%;
+    border-color: rgb(175, 175, 175);
+    border-radius: 2rem;
+    background: rgb(250, 250, 250);
+    font-size: 1.5rem;
+    font-weight: 600;
+    border-color: rgb(252, 25, 0);
+    border-width: 3px;
+    border-style: dashed;
+    box-sizing: border-box;
+    visibility: hidden;
 }
 
-#excel {
-    margin-left: 5%;
-}
-
-.footer {
-    background: #237A57;
-    background: -webkit-linear-gradient(to right, #093028, #237A57 30%, #237A57 70%, #093028 100%);
-    background: linear-gradient(to right, #093028, #237A57 30%, #237A57 70%, #093028 100%);
-    height: 5px;
-    position: absolute;
+#footer {
+    position: fixed;
+    bottom: 0;
 }

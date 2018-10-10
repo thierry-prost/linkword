@@ -56,11 +56,19 @@ function upload(files, name) {
     throw new Error('Please use only one file at a time.');
   }
   formData.append('file[]', files[0]);
-  JSZipUtils.getBinaryContent(name, function (err, data) {
-      if (err) {
-        throw err;
-      };
-      saveAs(new Blob([new Uint8Array(data)]), 'linkword.zip');
-    },
-    formData);
+  try {
+    JSZipUtils.getBinaryContent(name, function (err, data) {
+        if (err) {
+          throw err;
+        };
+        saveAs(new Blob([new Uint8Array(data)]), 'linkword.zip');
+      },
+      formData);
+  } catch (err) {
+    handleError(err);
+  }
+}
+
+function handleError(err){
+  console.log('hi');
 }
