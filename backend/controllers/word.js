@@ -17,9 +17,14 @@ module.exports.downloadZip = function (req, res, next) {
     let fileNames = {};
     setFileNames();
     let newZip = new JSZip();
+    let doc;
     values.forEach(function (row, index) {
-      let zip = new JSZip(req.files[0].buffer);
-      let doc = new Docxtemplater().loadZip(zip);
+      try {
+        let zip = new JSZip(req.files[0].buffer);
+        doc = new Docxtemplater().loadZip(zip);
+      } catch (e) {
+        throw new Error('Word document format is invalid.');
+      }
       let data = {};
       headers.forEach((header, i) => data[header] = row[i]);
       doc.setData(data);
@@ -62,7 +67,7 @@ module.exports.downloadZip = function (req, res, next) {
         values.forEach((row, i) => fileNames[i] = `${row[index]}.docx`);
       }
     }
-  } catch(err) {
+  } catch (err) {
     return next(err);
   }
 }

@@ -2,6 +2,7 @@ window.onload = function () {
   preventDefaults();
   setup('word');
   setup('excel');
+  addClicks();
 }
 
 function setup(id) {
@@ -51,24 +52,75 @@ function preventDefaults() {
 }
 
 function upload(files, name) {
+  setVisibility('error', 'none');
   let formData = new FormData();
   if (files.length !== 1) {
     throw new Error('Please use only one file at a time.');
   }
   formData.append('file[]', files[0]);
-  try {
-    JSZipUtils.getBinaryContent(name, function (err, data) {
-        if (err) {
-          throw err;
-        };
+  JSZipUtils.getBinaryContent(name, function (err, data) {
+      if (err) {
+        handleError(err);
+      };
+      if (data) {
         saveAs(new Blob([new Uint8Array(data)]), 'linkword.zip');
-      },
-      formData);
-  } catch (err) {
-    handleError(err);
-  }
+      }
+    },
+    formData);
 }
 
-function handleError(err){
-  console.log('hi');
+function handleError(err) {
+  setVisibility('error', 'block');
+  document.getElementById('errormessage').innerHTML = err;
+  reset();
+}
+
+function setVisibility(id, display) {
+  let block = document.getElementById(id);
+  block.style.display = display;
+}
+
+function reset() {
+  setOpacity(document.getElementById('word'), 'icon', 1);
+  setOpacity(document.getElementById('word'), 'upload', 0);
+  setOpacity(document.getElementById('excel'), 'icon', 1);
+  setOpacity(document.getElementById('excel'), 'upload', 0);
+}
+
+function hardReset() {
+  let xhr = new XMLHttpRequest();
+  xhr.open('get', 'reset');
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState == 4) {
+      reset();
+      setVisibility('error', 'none');
+      setVisibility('copyright', 'none');
+    }
+  };
+  xhr.send(null);
+}
+
+function addClicks() {
+  document.getElementById('info').addEventListener('click', () => {
+    window.location.href = "www.youtube.com";
+  });
+  document.getElementById('copyright-icon').addEventListener('click', () => {
+    toggle();
+  });
+  document.getElementById('refresh').addEventListener('click', () => {
+    hardReset();
+  });
+  document.getElementById('contact').addEventListener('click', () => {
+    window.location.href = "mailto:thierry.prost@quantech.eu";
+  });
+}
+
+function toggle() {
+  let copyRight = document.getElementById('copyright');
+  console.log(copyright.style.display);
+  if (copyRight.style.display == 'none' || copyRight.style.display == '') {
+    copyRight.style.display = 'block';
+  } else {
+    copyright.style.display = 'none';
+  }
 }

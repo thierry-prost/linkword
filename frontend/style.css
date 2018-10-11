@@ -29,12 +29,14 @@ h2 {
 
 .office {
     width: 40%;
-    max-width: 205px;
+    max-width: 190px;
     padding: 1.5rem;
 }
 
 .icon {
-    width: 10%;
+    min-width: 60px;
+    width: 8%;
+    cursor: pointer;
 }
 
 .description {
@@ -78,25 +80,40 @@ h2 {
     }
 }
 
-#error {
-    display: inline-block;
+#error,
+#copyright {
+    display: none;
     width: 90%;
     text-align: center;
-    padding: 2rem 5%;
-    margin: 0 5% 10% 5%;
+    padding: 1.4rem 5%;
+    margin: 0 5% 2rem 5%;
     border-color: rgb(175, 175, 175);
     border-radius: 2rem;
     background: rgb(250, 250, 250);
-    font-size: 1.5rem;
-    font-weight: 600;
-    border-color: rgb(252, 25, 0);
     border-width: 3px;
     border-style: dashed;
     box-sizing: border-box;
-    visibility: hidden;
+}
+
+#erroricon {
+    width: 50px;
+    left: 0;
+}
+
+#error {
+    border-color: rgb(252, 25, 0);
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+#copyright {
+    border-color: rgb(16, 219, 43);
+    font-size: 1rem;
+    font-weight: 400;
 }
 
 #footer {
     position: fixed;
-    bottom: 0;
+    bottom: 3px;
+    left: 75%;
 }

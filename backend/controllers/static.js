@@ -6,7 +6,7 @@ exports.loadStatic = function (req, res) {
   if (extension == 'css') {
     res.header("content-type", "text/css")
   }
-  if(extension == 'js') {
+  if (extension == 'js') {
     res.header('content-type', 'application/javascript')
   }
   response.pipe(res);

@@ -77,23 +77,27 @@
                     try {
                       file = JSZipUtils._getBinaryFromXHR(xhr);
                     } catch (e) {
-                      err = new Error("Looks like you closed the terminal (that black window)...?");
+                      err = 'Try using a different browser or reach out to us using the contact button.';
                     }
                     callback(err, file);
                   }
                 } else {
-                  callback(new Error("Looks like you closed the terminal (that black window)...?"), null);
+                  if (xhr.status === 500) {
+                    let decodedString = String.fromCharCode.apply(null, new Uint8Array(xhr.response));
+                    var json = JSON.parse(decodedString);
+                    callback(json['error'], null);
+                  }
                 }
               }
             };
 
             xhr.onerror = function (err) {
-              callback(new Error("Looks like you closed the terminal (that black window)...?"), null);
+              callback('Looks like you closed the terminal (that black window)?', null);
             }
 
             xhr.send(data);
           } catch (e) {
-            callback(new Error(e), null);
+            callback(e.message, null);
           }
         };
         module.exports = JSZipUtils;
