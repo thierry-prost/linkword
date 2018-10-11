@@ -1,4 +1,5 @@
 window.onload = function () {
+  console.log('a');
   preventDefaults();
   setup('word');
   setup('excel');
@@ -19,7 +20,7 @@ function setup(id) {
     setOpacity(this, 'upload', 0);
   }
   dropzone.ondrop = function (e) {
-    e.preventDefault();
+    e.preventDefault ? e.preventDefault() : (e.returnValue = false);
     upload(e.dataTransfer.files, id);
   }
 }
@@ -43,11 +44,11 @@ function setOpacity(el, name, opacity) {
 function preventDefaults() {
   window.addEventListener("dragover", function (e) {
     e = e || event;
-    e.preventDefault();
+    e.preventDefault ? e.preventDefault() : (e.returnValue = false);
   }, false);
   window.addEventListener("drop", function (e) {
     e = e || event;
-    e.preventDefault();
+    e.preventDefault ? e.preventDefault() : (e.returnValue = false);
   }, false);
 }
 
@@ -101,16 +102,13 @@ function hardReset() {
 }
 
 function addClicks() {
-  document.getElementById('info').addEventListener('click', () => {
-    window.location.href = "www.youtube.com";
-  });
-  document.getElementById('copyright-icon').addEventListener('click', () => {
+  document.getElementById('copyright-icon').addEventListener('click', function () {
     toggle();
   });
-  document.getElementById('refresh').addEventListener('click', () => {
+  document.getElementById('refresh').addEventListener('click', function () {
     hardReset();
   });
-  document.getElementById('contact').addEventListener('click', () => {
+  document.getElementById('contact').addEventListener('click', function () {
     window.location.href = "mailto:thierry.prost@quantech.eu";
   });
 }
