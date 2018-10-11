@@ -1,5 +1,4 @@
 window.onload = function () {
-  console.log('a');
   preventDefaults();
   setup('word');
   setup('excel');
@@ -115,7 +114,6 @@ function addClicks() {
 
 function toggle() {
   let copyRight = document.getElementById('copyright');
-  console.log(copyright.style.display);
   if (copyRight.style.display == 'none' || copyRight.style.display == '') {
     copyRight.style.display = 'block';
   } else {

@@ -12,7 +12,7 @@ module.exports = function (app) {
   app.post('/word', upload.any(), word.downloadZip, errorHandler);
   app.get('/reset', reset.resetCache);
   app.get('/', static.loadIndex);
-  app.get(/([a-zA-Z0-9\s_\\.\-\(\):])+(.css|.js|.html)$/, static.loadStatic);
+  app.get(/([a-zA-Z0-9\s_\\.\-\(\):])+(.css|.js|.html|.ico)$/, static.loadStatic);
 }
 
 function errorHandler(err, req, res, next) {
