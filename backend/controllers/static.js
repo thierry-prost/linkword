@@ -9,6 +9,9 @@ exports.loadStatic = function (req, res) {
   if (extension == 'js') {
     res.header('content-type', 'application/javascript')
   }
+  if (extension == 'ico') {
+    res.header('content-type', 'image/x-icon');
+  }
   response.pipe(res);
 }
 
