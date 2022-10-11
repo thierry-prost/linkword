@@ -10,7 +10,7 @@
   "author": "Thierry Prost",
   "license": "ISC",
   "dependencies": {
-    "docxtemplater": "^3.9.0",
+    "docxtemplater": "^3.31.4",
     "express": "^4.16.3",
     "jszip": "^2.6.0",
     "memory-cache": "^0.2.0",
